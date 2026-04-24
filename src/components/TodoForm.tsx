@@ -7,11 +7,12 @@ type TodoFormProps = {
 
 function TodoForm({ onSubmit, error }: TodoFormProps) {
   const [value, setValue] = useState('');
+  const trimmedValue = value.trim();
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    if (onSubmit(value)) {
+    if (onSubmit(trimmedValue)) {
       setValue('');
     }
   };
@@ -27,7 +28,7 @@ function TodoForm({ onSubmit, error }: TodoFormProps) {
           placeholder="Add a task"
           value={value}
         />
-        <button className="primary-button" type="submit">
+        <button className="primary-button" disabled={!trimmedValue} type="submit">
           Add
         </button>
       </div>
