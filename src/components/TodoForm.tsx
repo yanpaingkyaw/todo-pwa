@@ -22,6 +22,8 @@ function TodoForm({ onSubmit, error }: TodoFormProps) {
       <div className="todo-form-row">
         <input
           aria-label="New todo"
+          aria-describedby={error ? 'todo-form-error' : undefined}
+          aria-invalid={error ? 'true' : 'false'}
           className="todo-input"
           maxLength={120}
           onChange={(event) => setValue(event.target.value)}
@@ -33,7 +35,11 @@ function TodoForm({ onSubmit, error }: TodoFormProps) {
         </button>
       </div>
 
-      {error ? <p className="form-error">{error}</p> : null}
+      {error ? (
+        <p className="form-error" id="todo-form-error" role="alert">
+          {error}
+        </p>
+      ) : null}
     </form>
   );
 }
